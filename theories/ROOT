@@ -1,0 +1,33 @@
+(*
+ *  Build (from the repository root, which holds the ROOTS file):
+ *
+ *    isabelle build -d . -b -v Quotient_DR_Voting_Rules
+ *
+ *  This first builds the parent session Verified_Voting_Rule_Construction
+ *  from the git submodule upstream/, then the theories of this session.
+ *
+ *  Interactive use:
+ *
+ *    isabelle jedit -d . -l Verified_Voting_Rule_Construction theories/Quotient_Kemeny_Rule.thy
+ *)
+
+session Quotient_DR_Voting_Rules = Verified_Voting_Rule_Construction +
+  description
+    \<open>Verified Quotient Reasoning for Distance-Rationalizable Voting Rules
+      on the Simplex. Bachelor's thesis, Rosa Bauer, LMU Munich, 2026.
+      Extends the Verified Voting Rule Construction framework
+      (VeriVote/verifiedVotingRuleConstruction, commit 1d4225f).\<close>
+  options [timeout = 1200, document = false]
+
+  theories
+  (* extensions of upstream theories, one file per upstream theory *)
+    Norm_Ext
+    Votewise_Distance_Ext
+    Relation_Quotients_Ext
+    Election_Quotients_Ext
+    Quotient_Distance_Rationalization_Ext
+  (* new theories *)
+    Quotient_Voting_Symmetry
+    Quotient_Distance_Rationalization_Symmetry
+    Quotient_Swapwise_Rules_Helpers
+    Quotient_Kemeny_Rule
