@@ -683,7 +683,7 @@ lemma vote_count_rel_app:
     E :: "('a, 'v) Election"
   assumes g_in: "g \<in> carrier reversal\<^sub>\<G>"
   shows "vote_count q (rel_app g E) = vote_count (g q) E"
-  by (rule vote_count_profile_map[OF reversal_carrier_invol_pointwise[OF g_in]
+  by (rule vote_count_profile_map[where \<sigma> = g and \<tau> = g, OF reversal_carrier_invol_pointwise[OF g_in]
         reversal_carrier_invol_pointwise[OF g_in] rel_app_voters rel_app_profile])
 
 lemma vote_fraction_rel_app:
@@ -693,7 +693,7 @@ lemma vote_fraction_rel_app:
     E :: "('a, 'v) Election"
   assumes g_in: "g \<in> carrier reversal\<^sub>\<G>"
   shows "vote_fraction q (rel_app g E) = vote_fraction (g q) E"
-  by (rule vote_fraction_profile_map[OF reversal_carrier_invol_pointwise[OF g_in]
+  by (rule vote_fraction_profile_map[where \<sigma> = g and \<tau> = g, OF reversal_carrier_invol_pointwise[OF g_in]
         reversal_carrier_invol_pointwise[OF g_in] rel_app_voters rel_app_profile])
 
 text \<open>
