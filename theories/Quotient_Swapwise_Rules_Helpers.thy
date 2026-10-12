@@ -371,44 +371,44 @@ proof (unfold closed_restricted_rel.simps restricted_rel.simps elections_\<K>.si
 qed
 
 
-text ‹
+text \<open>
   On its consensus set, the restricted strong-unanimity rule is invariant
   under the anonymity-homogeneity relation: related consensus elections
   elect the same singleton, by the transfer lemma.
-›
+\<close>
 
 lemma strong_unanimity_in_invar_anon_hom:
   fixes A :: "'a set"
   shows "is_symmetry
-           (elect_r ∘ fun⇩ℰ (rule_𝒦 (strong_unanimity_in A)))
-           (Invariance (Restr (anonymity_homogeneity⇩ℛ (elections_𝒜 A))
-              (elections_𝒦 (strong_unanimity_in A)
+           (elect_r \<circ> fun\<^sub>\<E> (rule_\<K> (strong_unanimity_in A)))
+           (Invariance (Restr (anonymity_homogeneity\<^sub>\<R> (elections_\<A> A))
+              (elections_\<K> (strong_unanimity_in A)
                   :: ('a, 'v :: wellorder) Election set)))"
 proof (unfold is_symmetry.simps, intro allI impI)
   fix E E' :: "('a, 'v) Election"
-  assume "(E, E') ∈ Restr (anonymity_homogeneity⇩ℛ (elections_𝒜 A))
-                          (elections_𝒦 (strong_unanimity_in A))"
-  hence rel: "(E, E') ∈ anonymity_homogeneity⇩ℛ (elections_𝒜 A)" and
-        E_Y: "E ∈ elections_𝒦 (strong_unanimity_in A)"
+  assume "(E, E') \<in> Restr (anonymity_homogeneity\<^sub>\<R> (elections_\<A> A))
+                          (elections_\<K> (strong_unanimity_in A))"
+  hence rel: "(E, E') \<in> anonymity_homogeneity\<^sub>\<R> (elections_\<A> A)" and
+        E_Y: "E \<in> elections_\<K> (strong_unanimity_in A)"
     by blast+
-  from E_Y obtain w where "E ∈ 𝒦⇩ℰ (strong_unanimity_in A) w"
-    unfolding elections_𝒦.simps
+  from E_Y obtain w where "E \<in> \<K>\<^sub>\<E> (strong_unanimity_in A) w"
+    unfolding elections_\<K>.simps
     by blast
-  hence cons_pair: "E ∈ 𝒦⇩ℰ (strong_unanimity_in A) w
-                      ∧ E' ∈ 𝒦⇩ℰ (strong_unanimity_in A) w"
+  hence cons_pair: "E \<in> \<K>\<^sub>\<E> (strong_unanimity_in A) w
+                      \<and> E' \<in> \<K>\<^sub>\<E> (strong_unanimity_in A) w"
     using strong_unanimity_in_anon_hom_transfer[OF rel]
     by blast
-  obtain A⇩1 V p where E_eq: "E = (A⇩1, V, p)"
+  obtain A\<^sub>1 V p where E_eq: "E = (A\<^sub>1, V, p)"
     using prod_cases3 by blast
-  obtain A⇩2 V' p' where E'_eq: "E' = (A⇩2, V', p')"
+  obtain A\<^sub>2 V' p' where E'_eq: "E' = (A\<^sub>2, V', p')"
     using prod_cases3 by blast
-  have "elect (rule_𝒦 (strong_unanimity_in A)) V A⇩1 p = {w}" and
-       "elect (rule_𝒦 (strong_unanimity_in A)) V' A⇩2 p' = {w}"
+  have "elect (rule_\<K> (strong_unanimity_in A)) V A\<^sub>1 p = {w}" and
+       "elect (rule_\<K> (strong_unanimity_in A)) V' A\<^sub>2 p' = {w}"
     using cons_pair
-    unfolding E_eq E'_eq 𝒦⇩ℰ.simps
+    unfolding E_eq E'_eq \<K>\<^sub>\<E>.simps
     by blast+
-  thus "(elect_r ∘ fun⇩ℰ (rule_𝒦 (strong_unanimity_in A))) E
-          = (elect_r ∘ fun⇩ℰ (rule_𝒦 (strong_unanimity_in A))) E'"
+  thus "(elect_r \<circ> fun\<^sub>\<E> (rule_\<K> (strong_unanimity_in A))) E
+          = (elect_r \<circ> fun\<^sub>\<E> (rule_\<K> (strong_unanimity_in A))) E'"
     unfolding E_eq E'_eq
     by simp
 qed
@@ -1304,7 +1304,7 @@ subsection \<open>Invariance of the Distance-Rationalized Winners\<close>
 
 text \<open>
   Score invariance, one-sided: whatever consensus election b the infimum for E
-  ranges over, E' has a partner b' at exactly the same distance — the
+  ranges over, E' has a partner b' at exactly the same distance -- the
   unanimity election with b's ballot on E''s own voter set. Members over
   other voter sets contribute \<infinity> and cannot lower the infimum.
 \<close>
